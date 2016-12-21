@@ -8,7 +8,10 @@ const notes = require('./notes');
 
 const argv = yargs.argv;
 
-const command = argv._[0]; 
+const command = argv._[0];
+
+
+
 console.log('command: ', command);
 console.log('Yargs: ', argv);
 
@@ -17,9 +20,7 @@ if(command === 'add'){
     let note = notes.addNote(argv.title, argv.body);
     if(note){
         console.log('Note created');
-        console.log('------------');
-        console.log('Title: ' + note.title);
-        console.log('Body: ' + note.body);
+        notes.logNote(note);
     }else{
         console.log('Note title taken');
     }
@@ -27,7 +28,15 @@ if(command === 'add'){
 }else if(command === 'list'){
     notes.getAll();
 }else if(command === 'read'){
-    notes.getNote(argv.title);
+    const note = notes.getNote(argv.title);
+
+    if(note){
+        console.log('Here your note:');
+        notes.logNote(note);
+    }else{
+        console.log('Note not found');
+    }
+
 }else if(command === 'remove'){
     const noteRemoved = notes.removeNote(argv.title);
     let message = noteRemoved ? 'Note was removed' : 'Note not found' ;

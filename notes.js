@@ -11,6 +11,12 @@ const fetchNotes = () => {
     }
 }
 
+const logNote = (note) => {
+    console.log('------------');
+    console.log('Title: ' + note.title);
+    console.log('Body: ' + note.body);
+}
+
 const saveNotes = (notes) => {
     fs.writeFileSync('notes-data.json', JSON.stringify(notes));
 }
@@ -37,7 +43,9 @@ const getAll = () =>{
 }
 
 const getNote = (title) =>{
-    console.log(`call getNote(${title}) function`);
+    const notes   = fetchNotes();
+    const findedNote = notes.filter((note) => note.title === title);
+    return findedNote[0];
 }
 
 const removeNote = (title) =>{
@@ -57,4 +65,5 @@ module.exports = {
     getAll,
     getNote,
     removeNote,
+    logNote,
 }
