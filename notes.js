@@ -39,7 +39,7 @@ const addNote = (title, body) => {
 }
  
 const getAll = () =>{
-    console.log('call getAll() function');
+    return fetchNotes();
 }
 
 const getNote = (title) =>{
